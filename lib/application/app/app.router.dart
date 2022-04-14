@@ -10,12 +10,15 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
+import '../../ui/views/onboarding/onboarding_view.dart';
 import '../../ui/views/startup/startup_view.dart';
 
 class Routes {
-  static const String startupView = '/';
+  static const String startupView = '/startup-view';
+  static const String onBoardingView = '/';
   static const all = <String>{
     startupView,
+    onBoardingView,
   };
 }
 
@@ -24,6 +27,7 @@ class StackedRouter extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(Routes.startupView, page: StartupView),
+    RouteDef(Routes.onBoardingView, page: OnBoardingView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -34,5 +38,24 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    OnBoardingView: (data) {
+      var args = data.getArgs<OnBoardingViewArguments>(
+        orElse: () => OnBoardingViewArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => OnBoardingView(key: args.key),
+        settings: data,
+      );
+    },
   };
+}
+
+/// ************************************************************************
+/// Arguments holder classes
+/// *************************************************************************
+
+/// OnBoardingView arguments holder class
+class OnBoardingViewArguments {
+  final Key? key;
+  OnBoardingViewArguments({this.key});
 }
