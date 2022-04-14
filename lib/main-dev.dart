@@ -1,11 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_logs/flutter_logs.dart';
-import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/date_symbol_data_file.dart';
+import 'package:superappsnusa/application/app/app.locator.dart';
+import 'package:superappsnusa/application/app/nss_app.dart';
+import 'package:superappsnusa/application/helpers/my_http_overrrides.dart';
+import 'package:superappsnusa/flavors.dart';
 
 Future main() async {
+  F.appFlavor = Flavor.DEV;
+
   WidgetsFlutterBinding.ensureInitialized();
 
   await FlutterLogs.initLogs(
@@ -13,12 +20,12 @@ Future main() async {
       LogLevel.INFO,
       LogLevel.WARNING,
       LogLevel.ERROR,
-      LogLevel.SEVERE
+      LogLevel.SEVERE,
     ],
-    directoryStructure: DirectoryStructure.FOR_DATE,
     timeStampFormat: TimeStampFormat.TIME_FORMAT_READABLE,
-    logFileExtension: LogFileExtension.TXT,
+    directoryStructure: DirectoryStructure.FOR_DATE,
     logTypesEnabled: ['device', 'network', 'errors', 'notification'],
+    logFileExtension: LogFileExtension.TXT,
     logsWriteDirectoryName: 'MyLogs',
     logsExportDirectoryName: 'MyLogs/Exported',
     debugFileOperations: true,
@@ -33,6 +40,12 @@ Future main() async {
     ),
   );
 
-  await initializeDateFormatting('id_ID', null);
+  // await initializeDateFormatting('id_ID', "");
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  setupLocator();
+
+  HttpOverrides.global = MyHttpOverrides();
+
+  runApp(const NssApp());
 }
