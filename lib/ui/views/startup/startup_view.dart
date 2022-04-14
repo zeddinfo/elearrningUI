@@ -20,7 +20,10 @@ class StartupView extends ViewModelBuilderWidget<StartupViewModel> {
   Widget builder(
       BuildContext context, StartupViewModel viewModel, Widget? child) {
     return Scaffold(
-      body: Container(),
+      backgroundColor: Colors.red,
+      body: Container(
+        child: Text("hello"),
+      ),
     );
   }
 }
