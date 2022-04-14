@@ -29,15 +29,30 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  # Stacked Architecture
+  stacked: ^2.3.0
+  stacked_services: ^0.8.17
+  stacked_hooks: ^0.2.1+1
+  #Utilities
+  dio: ^4.0.4
+  flutter_logs: ^2.1.5
+
+
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # Code Generator
+  build_runner: ^2.1.8
+  stacked_generator: ^0.6.0
+  # Data Structure
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -58,7 +73,12 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - assets/
+    - assets/images/
+    - assets/icons/
+    - assets/i18n/
+
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
